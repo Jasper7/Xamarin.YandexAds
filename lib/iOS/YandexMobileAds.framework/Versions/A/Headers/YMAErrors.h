@@ -1,5 +1,5 @@
 /*
- * Version for iOS © 2015–2019 YANDEX
+ * Version for iOS © 2015–2021 YANDEX
  *
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at https://yandex.com/legal/mobileads_sdk_agreement/
@@ -15,15 +15,11 @@ extern NSString *const kYMAAdsErrorDomain;
 /**
  Error description.
  */
-typedef NS_ENUM(NSUInteger, YMAAdErrorCode) {
+typedef NS_ENUM(NSInteger, YMAAdErrorCode) {
     /**
      The `BlockID` was omitted when loading the ad.
      */
     YMAAdErrorCodeEmptyBlockID,
-    /**
-     An invalid banner size is specified.
-     */
-    YMAAdErrorCodeInvalidBannerSize,
     /**
      An invalid `Application ID` was specified.
      */
@@ -43,7 +39,7 @@ typedef NS_ENUM(NSUInteger, YMAAdErrorCode) {
     /**
      The ad size in the request does not match the ad size specified in the Partner interface for this ad block.
      */
-    YMAAdErrorCodeBannerSizeMismatch,
+    YMAAdErrorCodeAdSizeMismatch,
     /**
      The ad type in the request does not match the ad type specified in the Partner interface for this ad block.
      */
@@ -55,16 +51,13 @@ typedef NS_ENUM(NSUInteger, YMAAdErrorCode) {
     /**
      A full-screen ad can be shown only once.
      */
-    YMAAdErrorCodeInterstitialHasAlreadyBeenPresented,
+    YMAAdErrorCodeAdHasAlreadyBeenPresented,
     /**
-     The ad can't be displayed because of the orientation (the size of the screen and the ad don't match).
+     ViewController passed for presenting full-screen ad is nil
      */
-    YMAAdErrorCodeInterstitialOrientationMismatch,
+    YMAAdErrorCodeNilPresentingViewController,
     /**
-     The AppMetrica library hasn't been initialized.
+     Incorret fullscrseen view
      */
-    YMAAdErrorCodeMetricaNotStarted,
-    /** A rewarded ad can be shown only once.
-     */
-    YMAAdErrorCodeRewardedHasAlreadyBeenPresented
+    YMAAdErrorCodeIncorrectFullscreenView
 };

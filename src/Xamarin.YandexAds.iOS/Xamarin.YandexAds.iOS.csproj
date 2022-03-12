@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,6 +10,22 @@
     <RootNamespace>Xamarin.YandexAds.iOS</RootNamespace>
     <AssemblyName>Xamarin.YandexAds.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <PackOnBuild>true</PackOnBuild>
+    <ReleaseVersion>4.4.2</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <PackageId>Xamarin.YandexAds.iOS</PackageId>
+    <PackageVersion>4.4.2</PackageVersion>
+    <Authors>Alekseev Aleksandr</Authors>
+    <Description>Mobile Ads from Yandex company https://partner.yandex.ru/</Description>
+    <Copyright>Alekseev Aleksandr</Copyright>
+    <PackageIconUrl>https://yastat.net/s3/partners/_/yT9nkJsCt0B4t5anHvPzwDvQJYI.png</PackageIconUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Jasper7/Xamarin.AppMetrica/master/YandexMetrica.Xamarin.iOSBinding/LICENSE.txt</PackageLicenseUrl>
+    <Owners>Alekseev Aleksandr</Owners>
+    <PackageReleaseNotes>First binding for Yandex Ads
+
+=== Important: Requered AppMetrica package ===</PackageReleaseNotes>
+    <PackageTags>yandex, ads, яндекс, реклама, рся, метрика, appmetrica, partner, xamarin, ios</PackageTags>
+    <Title>YandexAds library for Xamarin iOS</Title>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +47,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Drawing.Common.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,10 +69,8 @@
     </NativeReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Xamarin.YandexMetrika.iOS\Xamarin.YandexMetrika.iOS.csproj">
-      <Project>{1CA85B14-C58E-43F3-8D88-36C7D35BE9F8}</Project>
-      <Name>Xamarin.YandexMetrika.iOS</Name>
-    </ProjectReference>
+    <BundleResource Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.targets')" />
 </Project>

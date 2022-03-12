@@ -1,5 +1,5 @@
 /*
- * Version for iOS © 2015–2019 YANDEX
+ * Version for iOS © 2015–2021 YANDEX
  *
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at https://yandex.com/legal/mobileads_sdk_agreement/
@@ -8,10 +8,18 @@
 #import <Foundation/Foundation.h>
 #import <YandexMobileAds/YMADeviceTypes.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class YMAAudioSessionManager;
+
 /**
  This class allows you to set general SDK settings.
  */
 @interface YMAMobileAds : NSObject
+
+- (instancetype)init NS_UNAVAILABLE;
+
++ (instancetype)new NS_UNAVAILABLE;
 
 /**
  Enables logging. By default, logging is disabled.
@@ -23,6 +31,12 @@
  @return The version of the SDK in X.YY format.
  */
 + (NSString *)SDKVersion;
+
+/**
+ Returns the audio session manager.
+ @return The audio session manager.
+ */
++ (YMAAudioSessionManager *)audioSessionManager;
 
 /**
  The SDK automatically collects location data if the user allowed the app to track the location.
@@ -52,3 +66,5 @@
 + (void)setUserConsent:(BOOL)consent;
 
 @end
+
+NS_ASSUME_NONNULL_END

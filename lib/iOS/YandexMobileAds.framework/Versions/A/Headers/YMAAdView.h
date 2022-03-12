@@ -1,5 +1,5 @@
 /*
- * Version for iOS © 2015–2019 YANDEX
+ * Version for iOS © 2015–2021 YANDEX
  *
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at https://yandex.com/legal/mobileads_sdk_agreement/
@@ -12,6 +12,9 @@
 @class YMAVideoController;
 
 @protocol YMAAdViewDelegate;
+@protocol YMAImpressionData;
+
+NS_ASSUME_NONNULL_BEGIN
 /**
  This class is responsible for setting up and displaying the banner.
  */
@@ -23,7 +26,7 @@
  (for example, a `UIViewController` object that `AdView` uses to show a modal controller
  in response to the user interacting with the banner).
  */
-@property (nonatomic, weak) id<YMAAdViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id<YMAAdViewDelegate> delegate;
 
 /**
  The Block ID is a unique identifier in the R-M-XXXXXX-Y format, which is assigned in the Partner interface.
@@ -35,30 +38,21 @@
  */
 @property (nonatomic, strong, readonly) YMAVideoController *videoController;
 
+- (instancetype)init NS_UNAVAILABLE;
+
++ (instancetype)new NS_UNAVAILABLE;
+
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 /**
  Initializes an object of the YMAAdView class to display the banner with the specified size.
  @param blockID The Block ID is a unique identifier in the R-M-XXXXXX-Y format,
  which is assigned in the Partner interface.
  @param adSize The size of the banner. The size of the banner is set in the YMAAdSize class.
- @param delegate The object implements the YMAAdViewDelegate protocol that monitors the ad.
  @return Initializes an object of the YMAAdView class to display the banner with the specified size.
  */
-- (instancetype)initWithBlockID:(NSString *)blockID
-                         adSize:(YMAAdSize *)adSize
-                       delegate:(id<YMAAdViewDelegate>)delegate;
-
-/**
- Initializes an object of the YMAAdView class to display the banner with the fixed size.
- @warning This method is deprecated. Use [YMAAdView initWithBlockID:adSize:delegate:].
- @param blockID The Block ID is a unique identifier in the R-M-XXXXXX-Y format,
- which is assigned in the Partner interface.
- @param size The size of the banner.
- @param delegate The object implements the YMAAdViewDelegate protocol that monitors the ad.
- @return Initializes an object of the YMAAdView class to display the banner with the specified size.
- */
-- (instancetype)initWithBlockID:(NSString *)blockID
-                           size:(CGSize)size
-                       delegate:(id<YMAAdViewDelegate>)delegate __attribute__((deprecated("[YMAAdView initWithBlockID:adSize:delegate:] should be used instead")));
+- (instancetype)initWithBlockID:(NSString *)blockID adSize:(YMAAdSize *)adSize;
 
 /**
  Displays the banner centered at the top of the passed `View`.
@@ -81,7 +75,7 @@
  Loads a banner with data for targeting.
  @param request Data for targeting.
  */
-- (void)loadAdWithRequest:(YMAAdRequest *)request;
+- (void)loadAdWithRequest:(nullable YMAAdRequest *)request;
 
 /**
  Returns the size of the banner content.
@@ -107,7 +101,7 @@
  @return The `UIViewController` object that `AdView` uses for showing a modal controller
  in response to the user's interaction with the banner.
  */
-- (UIViewController *)viewControllerForPresentingModalView;
+- (nullable UIViewController *)viewControllerForPresentingModalView;
 
 /**
  Notifies that the banner is loaded.
@@ -132,14 +126,25 @@
 
 /**
  Notifies that the user has clicked on the banner and the in-app browser will open now.
+ @param adView A reference to the object of the YMAAdView class that invoked the method. 
  @param viewController Modal `UIViewController`.
  */
-- (void)adViewWillPresentScreen:(UIViewController *)viewController;
+- (void)adView:(YMAAdView *)adView willPresentScreen:(nullable UIViewController *)viewController;
 
 /**
  Notifies that the user has closed the embedded browser.
+ @param adView A reference to the object of the YMAAdView class that invoked the method.
  @param viewController Modal `UIViewController`.
  */
-- (void)adViewDidDismissScreen:(UIViewController *)viewController;
+- (void)adView:(YMAAdView *)adView didDismissScreen:(nullable UIViewController *)viewController;
+
+/**
+ Notifies delegate when an impression was tracked.
+ @param adView A reference to the object of the YMAAdView class that invoked the method.
+ @param impressionData Ad impression-level revenue data.
+ */
+- (void)adView:(YMAAdView *)adView didTrackImpressionWithData:(nullable id<YMAImpressionData>)impressionData;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 /*
- * Version for iOS © 2015–2019 YANDEX
+ * Version for iOS © 2015–2021 YANDEX
  *
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at https://yandex.com/legal/mobileads_sdk_agreement/
@@ -13,9 +13,16 @@
 extern NSString *const kYMAVASTErrorDomain;
 
 /**
+ If the response can not be parsed as XML, loader returns error.
+ kYMAVASTSpecialResponseTextKey is a key in userInfo
+ for original server response.
+ */
+extern NSString *const kYMAVASTSpecialResponseTextKey;
+
+/**
  Yandex Mobile Video Ads error code.
  */
-typedef NS_ENUM(NSUInteger, YMAVASTErrorCode) {
+typedef NS_ENUM(NSInteger, YMAVASTErrorCode) {
     /**
      Returned for empty VAST response.
      */

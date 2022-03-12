@@ -1,5 +1,5 @@
 /*
- * Version for iOS © 2015–2019 YANDEX
+ * Version for iOS © 2015–2021 YANDEX
  *
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at https://yandex.com/legal/mobileads_sdk_agreement/
@@ -8,6 +8,9 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol YMANativeAd;
+@protocol YMAImpressionData;
 
 @protocol YMANativeAdDelegate <NSObject>
 
@@ -19,13 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
  @return `UIViewController` object that is used for showing a modal controller
  in response to the user's interaction with the banner.
  */
-- (UIViewController *)viewControllerForPresentingModalView;
+- (nullable UIViewController *)viewControllerForPresentingModalView;
 
 /**
  Notifies that the user switched from the ad to an app (for example, the browser).
  @param ad A reference to the object that invoked the method.
  */
-- (void)nativeAdWillLeaveApplication:(null_unspecified id)ad;
+- (void)nativeAdWillLeaveApplication:(id<YMANativeAd>)ad;
 
 /**
  Notifies that the ad will show the modal `UIViewController`
@@ -33,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param ad A reference to the object that invoked the method.
  @param viewController Modal `UIViewController`.
  */
-- (void)nativeAd:(null_unspecified id)ad willPresentScreen:(nullable UIViewController *)viewController;
+- (void)nativeAd:(id<YMANativeAd>)ad willPresentScreen:(nullable UIViewController *)viewController;
 
 /**
  Notifies that the ad finished showing the modal `UIViewController`
@@ -41,7 +44,14 @@ NS_ASSUME_NONNULL_BEGIN
  @param ad A reference to the object that invoked the method.
  @param viewController Modal `UIViewController`.
  */
-- (void)nativeAd:(null_unspecified id)ad didDismissScreen:(nullable UIViewController *)viewController;
+- (void)nativeAd:(id<YMANativeAd>)ad didDismissScreen:(nullable UIViewController *)viewController;
+
+/**
+ Notifies delegate when an impression was tracked.
+ @param ad A reference to the object that invoked the method.
+ @param impressionData Ad impression-level revenue data.
+ */
+- (void)nativeAd:(id<YMANativeAd>)ad didTrackImpressionWithData:(nullable id<YMAImpressionData>)impressionData;
 
 /**
  Notifies that the user has chosen a reason for closing the ad and the ad must be hidden.
@@ -49,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
  The developer must determine what to do with the ad after the reason for closing it is chosen.
  @param ad A reference to the object that invoked the method.
  */
-- (void)closeNativeAd:(null_unspecified id)ad;
+- (void)closeNativeAd:(id<YMANativeAd>)ad;
 
 @end
 

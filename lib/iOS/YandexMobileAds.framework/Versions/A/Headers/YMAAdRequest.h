@@ -1,12 +1,12 @@
 /*
- * Version for iOS © 2015–2019 YANDEX
+ * Version for iOS © 2015–2021 YANDEX
  *
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at https://yandex.com/legal/mobileads_sdk_agreement/
  */
 
-#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YMAAdRequest : NSObject <NSCopying, NSMutableCopying>
 
 /**
- User location.
+ User age.
  */
-@property (nonatomic, copy, readonly, nullable) CLLocation *location;
+@property (nonatomic, strong, readonly, nullable) NSNumber *age;
 
 /**
  The search query that the user entered in the app.
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  List of tags. Matches the context in which the ad will be displayed.
  */
-@property (nonatomic, copy, readonly, nullable) NSArray *contextTags;
+@property (nonatomic, copy, readonly, nullable) NSArray<NSString *> *contextTags;
 
 /**
  The gender of the user. For a list of values, see the YMAGender section.
@@ -36,40 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly, nullable) NSString *gender;
 
 /**
- User age.
+ User location.
  */
-@property (nonatomic, strong, readonly, nullable) NSNumber *age;
+@property (nonatomic, copy, readonly, nullable) CLLocation *location;
 
 /**
  A set of arbitrary input parameters.
  */
-@property (nonatomic, copy, readonly, nullable) NSDictionary *parameters;
-
-/**
- Initializes an object of the `YMAAdRequest` class with the user's location, search query, and tags.
- @param location User location.
- @param contextQuery The search query that the user entered in the app.
- @param contextTags List of tags. Matches the context in which the ad will be displayed.
- @return An object of the `YMAAdRequest` class with the user's location, search query, and tags.
- */
-- (instancetype)initWithLocation:(nullable CLLocation *)location
-                    contextQuery:(nullable NSString *)contextQuery
-                     contextTags:(nullable NSArray *)contextTags;
-
-/**
- Initializes an object of the `YMAAdRequest` class with the user's location, search query,
- tags, and input parameters.
- @param location User location.
- @param contextQuery The search query that the user entered in the app.
- @param contextTags List of tags. Matches the context in which the ad will be displayed.
- @param parameters A set of arbitrary input parameters.
- @return An object of the `YMAAdRequest` class with the user's location, search query,
- tags, and input parameters.
- */
-- (instancetype)initWithLocation:(nullable CLLocation *)location
-                    contextQuery:(nullable NSString *)contextQuery
-                     contextTags:(nullable NSArray *)contextTags
-                      parameters:(nullable NSDictionary *)parameters NS_DESIGNATED_INITIALIZER;
+@property (nonatomic, copy, readonly, nullable) NSDictionary<NSString *, NSString*> *parameters;
 
 @end
 
@@ -79,9 +53,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YMAMutableAdRequest : YMAAdRequest
 
 /**
- User location.
+ User age.
  */
-@property (nonatomic, copy, nullable) CLLocation *location;
+@property (nonatomic, strong, nullable) NSNumber *age;
 
 /**
  The search query that the user entered in the app.
@@ -91,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  List of tags. Matches the context in which the ad will be displayed.
  */
-@property (nonatomic, copy, nullable) NSArray *contextTags;
+@property (nonatomic, copy, nullable) NSArray<NSString *> *contextTags;
 
 /**
  The gender of the user. For a list of values, see the YMAGender section.
@@ -99,14 +73,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *gender;
 
 /**
- User age.
+ User location.
  */
-@property (nonatomic, strong, nullable) NSNumber *age;
+@property (nonatomic, copy, nullable) CLLocation *location;
 
 /**
  A set of arbitrary input parameters.
  */
-@property (nonatomic, copy, nullable) NSDictionary *parameters;
+@property (nonatomic, copy, nullable) NSDictionary<NSString *, NSString *> *parameters;
 
 @end
 

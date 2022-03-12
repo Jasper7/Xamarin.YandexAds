@@ -1,123 +1,117 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using ObjCRuntime;
 
 namespace Xamarin.YandexAds.iOS
 {
-    [Native]
-    public enum YMAIconResourceType : ulong
-    {
-        Unknown,
-        Static,
-        IFrame,
-        Html
-    }
+	[Native]
+	public enum YMADeliveryMethod : ulong
+	{
+		Unknown,
+		Streaming,
+		Progressive
+	}
 
-    [Native]
-    public enum YMAIconHorizontalPosition : ulong
-    {
-        Left,
-        Right,
-        LeftOffset
-    }
+	[Native]
+	public enum YMANativeAdType : long
+	{
+		Content,
+		AppInstall,
+		Media
+	}
 
-    [Native]
-    public enum YMAIconVerticalPosition : ulong
-    {
-        Top,
-        Bottom,
-        TopOffset
-    }
+	[Flags]
+	[Native]
+	public enum YMADeviceType : ulong
+	{
+		None = 0x0,
+		Hardware = 1uL << 0,
+		Simulator = 1uL << 1
+	}
 
-    [Native]
-    public enum YMADeviceType : ulong
-    {
-        None = 0,
-        Hardware = 1 << 0,
-        Simulator = 1 << 1
-    }
+	[Native]
+	public enum YMAVMAPErrorCode : long
+	{
+		YMAVMAPErrorCodeInvalidXMLResponse
+	}
 
-    [Native]
-    public enum YMADeliveryMethod : ulong
-    {
-        Unknown,
-        Streaming,
-        Progressive
-    }
+	[Native]
+	public enum YMAVASTAdType : ulong
+	{
+		Unknown,
+		InLine,
+		Wrapper
+	}
 
-    [Native]
-    public enum YMAVMAPErrorCode : ulong
-    {
-        YMAVMAPErrorCodeInvalidXMLResponse
-    }
+	[Native]
+	public enum YMAAdErrorCode : long
+	{
+		EmptyBlockID,
+		InvalidUUID,
+		NoSuchBlockID,
+		NoFill,
+		BadServerResponse,
+		AdSizeMismatch,
+		AdTypeMismatch,
+		ServiceTemporarilyNotAvailable,
+		AdHasAlreadyBeenPresented,
+		NilPresentingViewController,
+		IncorrectFullscreenView
+	}
 
-    [Native]
-    public enum YMABlockType : ulong
-    {
-        Unknown,
-        Preroll,
-        Midroll,
-        Postroll,
-        Pauseroll,
-        Overlayroll
-    }
+	[Native]
+	public enum YMAVASTErrorCode : long
+	{
+		NoAdsInVASTResponse,
+		InvalidXMLResponse,
+		CannotBuildRequest
+	}
 
-    [Native]
-    public enum YMAVASTAdType : ulong
-    {
-        Unknown,
-        InLine,
-        Wrapper
-    }
+	[Native]
+	public enum YMAVASTIconResourceType : ulong
+	{
+		Unknown,
+		Static,
+		IFrame,
+		Html
+	}
 
-    [Native]
-    public enum YMAAdErrorCode : ulong
-    {
-        EmptyBlockID,
-        InvalidBannerSize,
-        InvalidUUID,
-        NoSuchBlockID,
-        NoFill,
-        BadServerResponse,
-        BannerSizeMismatch,
-        AdTypeMismatch,
-        ServiceTemporarilyNotAvailable,
-        InterstitialHasAlreadyBeenPresented,
-        InterstitialOrientationMismatch,
-        MetricaNotStarted,
-        RewardedHasAlreadyBeenPresented
-    }
+	[Native]
+	public enum YMAVASTIconHorizontalPosition : ulong
+	{
+		Left,
+		Right,
+		LeftOffset
+	}
 
-    [Native]
-    public enum YMAVASTErrorCode : ulong
-    {
-        NoAdsInVASTResponse,
-        InvalidXMLResponse,
-        CannotBuildRequest
-    }
+	[Native]
+	public enum YMAVASTIconVerticalPosition : ulong
+	{
+		Top,
+		Bottom,
+		TopOffset
+	}
 
-    [Native]
-    public enum YMANativeErrorCode : ulong
-    {
-        NoViewForAsset,
-        InvalidViewForBinding,
-        InvalidBinder,
-        AdTypeMismatch
-    }
+	[Native]
+	public enum YMANativeErrorCode : long
+	{
+		NoViewForAsset,
+		InvalidViewForBinding
+	}
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct YMAHorizontalOffset
-    {
-        public nfloat left;
+	[StructLayout(LayoutKind.Sequential)]
+	public struct YMAHorizontalOffset
+	{
+		public nfloat left;
 
-        public nfloat right;
-    }
+		public nfloat right;
+	}
 
-    [Native]
-    public enum YMASizeConstraintType : ulong
-    {
-        Fixed,
-        FixedBannerRatio,
-        PreferredBannerRatio
-    }
+	[Native]
+	public enum YMASizeConstraintType : long
+	{
+		Fixed,
+		FixedBannerRatio,
+		PreferredBannerRatio
+	}
 }

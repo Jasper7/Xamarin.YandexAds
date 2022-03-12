@@ -1,11 +1,12 @@
 /*
- * Version for iOS © 2015–2019 YANDEX
+ * Version for iOS © 2015–2021 YANDEX
  *
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at https://yandex.com/legal/mobileads_sdk_agreement/
  */
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Attributes.
  */
-@property (nonatomic, copy, readonly) NSDictionary *attributes;
+@property (nonatomic, copy, readonly) NSDictionary<NSString *, NSString *> *attributes;
+
+- (instancetype)init NS_UNAVAILABLE;
+
++ (instancetype)new NS_UNAVAILABLE;
 
 /**
  Creates an object of the YMAAdSize class with the specified maximum height and width of the banner.
@@ -62,6 +67,14 @@ NS_ASSUME_NONNULL_BEGIN
  @return An object of the YMAAdSize class with the specified maximum size of the banner.
  */
 + (instancetype)flexibleSizeWithCGSize:(CGSize)size;
+
+/**
+ Creates an object of the YMAAdSize class with the specified width of the banner.
+ @discussion Returns sticky banner size with the given width.
+ @param width Width of the banner.
+ @return An object of the YMAAdSize class with the specified width of the sticky banner.
+ */
++ (instancetype)stickySizeWithContainerWidth:(CGFloat)width;
 
 @end
 

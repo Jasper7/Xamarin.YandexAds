@@ -1,5 +1,5 @@
 /*
- * Version for iOS © 2015–2019 YANDEX
+ * Version for iOS © 2015–2021 YANDEX
  *
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at https://yandex.com/legal/mobileads_sdk_agreement/
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol YMANativeGenericAd;
+@protocol YMANativeAd;
 
 /**
  This protocol is responsible for sending messages about image loading.
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  Notifies that the image is loaded successfully.
  @param ad A reference to the object that invoked the method.
  */
-- (void)nativeAdDidFinishLoadingImages:(id<YMANativeGenericAd>)ad;
+- (void)nativeAdDidFinishLoadingImages:(id<YMANativeAd>)ad;
 
 @end
 
